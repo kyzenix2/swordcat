@@ -1,14 +1,14 @@
-/* Knightcat
-   ca: paste a real contract (0x + 40 hex) to turn on Buy, Swap, and the chart.
+/* cat wif sword
+   ca: "TBA" until a real contract (0x + 40 hex) is pasted.
+   A real ca turns on Buy, Swap, and the chart.
    twitter: paste a full profile URL to point every X control at it.
-   Telegram is omitted — no Telegram link was provided.
 */
 const SITE = {
-  ca: "0x8cf263adfd88d72597a251908378a782a4e97aaf",
-  twitter: "https://x.com/knightcat_rh",
+  ca: "TBA",
+  twitter: "https://x.com/swordcat_eth",
 };
 
-const CHAIN = "robinhood";
+const CHAIN_SLUG = "ethereum";
 
 function isRealCa(value) {
   return /^0x[a-fA-F0-9]{40}$/.test((value || "").trim());
@@ -81,8 +81,8 @@ function applySite() {
   });
 
   if (real) {
-    const buyUrl = `https://app.uniswap.org/swap?chain=${CHAIN}&outputCurrency=${ca}`;
-    const chartUrl = `https://dexscreener.com/${CHAIN}/${ca}`;
+    const buyUrl = `https://app.uniswap.org/#/swap?inputCurrency=eth&outputCurrency=${ca}`;
+    const chartUrl = `https://dexscreener.com/${CHAIN_SLUG}/${ca}`;
     document.querySelectorAll("[data-buy]").forEach((node) => setExternal(node, buyUrl));
     document.querySelectorAll("[data-chart-link]").forEach((node) => setExternal(node, chartUrl));
 
@@ -90,12 +90,18 @@ function applySite() {
     if (frame) {
       const iframe = document.createElement("iframe");
       iframe.src = `${chartUrl}?embed=1&theme=dark&trades=0&info=0`;
-      iframe.title = "Knightcat live chart on DexScreener";
+      iframe.title = "cat wif sword live chart on DexScreener";
       iframe.loading = "lazy";
       iframe.allowFullscreen = true;
       frame.classList.remove("is-placeholder");
       frame.replaceChildren(iframe);
     }
+  } else {
+    document.querySelectorAll("[data-buy], [data-chart-link]").forEach((node) => {
+      node.href = "#";
+      node.removeAttribute("target");
+      node.removeAttribute("rel");
+    });
   }
 
   const twitter = (SITE.twitter || "").trim();
