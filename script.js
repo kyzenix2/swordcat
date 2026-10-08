@@ -1,10 +1,9 @@
 /* cat wif sword
-   ca: "TBA" until a real contract (0x + 40 hex) is pasted.
-   A real ca turns on Buy, Swap, and the chart.
+   ca: paste a real contract (0x + 40 hex) to turn on Buy, Swap, and the chart.
    twitter: paste a full profile URL to point every X control at it.
 */
 const SITE = {
-  ca: "TBA",
+  ca: "0x0009050f27a9eb231256bafbb901b906ee6cc9cf",
   twitter: "https://x.com/swordcat_eth",
 };
 
